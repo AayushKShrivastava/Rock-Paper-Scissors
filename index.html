@@ -1,90 +1,31 @@
-<!-- pseudecode
-  1. take user's selection
-  2. check if it's a valid value
-  3. generate computer selection
-  4. compare user's and computer selesction
-  5. declare the result
-  6. step 1 to 5 should be performed 5 times
-  7. declare the winner best of 5
-  8. check if user want to play again
--->
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="./rockPaperScissors.css">
+  <script src="./rockpaperscissors.js" defer></script>
   <title>Rock Paper Scissors</title>
   <meta charset="UTF-8"/>
 </head>
 <body>
-  
-    <script>
-    // Your JavaScript goes here!
-
-      game();
-
-    //functions
-
-      // function to play single round
-      function playRound(userShape, compShape){
-        if(userShape == compShape){
-          return "tied";
-        }
-        else if((userShape == 'ROCK' && compShape == 'SCISSORS') || (userShape == 'PAPER' && compShape == 'ROCK') || (userShape == 'SCISSORS' && compShape == 'PAPER')){
-          return 'user';
-        }
-        else
-          return 'computer';
-      }
-
-      //function to generate computer's selection
-      function computerPlay(){
-        const shapeOption = ['ROCK', 'PAPER', 'SCISSORS'];
-        const computerSelection = Math.floor(Math.random()*shapeOption.length);
-        return shapeOption[computerSelection];
-      }
-
-      //function to play five rounds of game
-      function game(){
-        let userWin = compWin = 0;
-        for(let i = 0; i < 5; i++){
-          let userShape = prompt("Enter your shape").toUpperCase();                              //converted user input to lowercase
-          if(userShape == "ROCK" || userShape == "PAPER" || userShape == "SCISSORS"){            //check for valid input
-            let computerShape = computerPlay().toUpperCase();                                                  //returned computer's selection
-            let result = playRound(userShape, computerShape);                                    //returned result of a round
-            if(result == 'user'){                                                                //checking who wins
-              console.log(`You Won Round ${i+1}! ${userShape} beats ${computerShape}`);
-              userWin++;
-            }
-            else if(result == 'computer'){
-              console.log(`You lose Round ${i+1}! ${computerShape} beats ${userShape}`);
-              compWin++;
-            }
-            else{
-              console.log(`Round ${i+1} Tied! Both Showed ${userShape}`);
-              userWin+=0.5;
-              compWin+=0.5;
-            }
-          }
-          else
-            console.log("Invalid Shape");
-        }
-        if(userWin > compWin){                                                                  //checking winner of the game
-          console.log("You Won The Game");
-        }
-        else if(compWin > userWin){
-          console.log("You Lose! Computer Wins");
-        }
-        else{
-          console.log("This Game Has No Winner");
-          }
-        if(Number(prompt("Press 1 to Play Again"))==1){                                          //checking if user want to play again
-          console.log("New Game!")
-          game();
-        }
-        else
-          console.log("Quit");
-        
-      }
-    
-    </script>
+  <h1>Rock Paper Scissors</h1>
+  <h2>Score The Five Points to Win!</h2>
+  <h3>Make Your Selection</h3>
+  <div class="button">
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+  </div>
+  <div class="score">
+    <div class="user">Your Score</div>
+    <div class="roundResult">0:0</div>
+    <div class="comp">Computer Score</div>
+  </div>
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body"></div>
+  </div>
+  <div id="overlay"></div>
 </body>
 </html>
